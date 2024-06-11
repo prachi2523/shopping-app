@@ -2,16 +2,16 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import React, { useState } from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Header = () => {
+const Header = ({ navigation }: any) => {
     const [searchText, setSearchText] = useState("")
-
+    console.log(navigation)
     const handleSearch = () => {
         console.log(searchText)
     }
     return (
         <View style={style.topContainer}>
             <View>
-                <Ionicons name='arrow-back' size={25} />
+                <Ionicons name='arrow-back' size={25} onPress={navigation.goBack} />
             </View>
             <View style={style.container}>
                 <TouchableOpacity style={style.searchBtn} onPress={handleSearch}>

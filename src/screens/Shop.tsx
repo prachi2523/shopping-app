@@ -7,7 +7,7 @@ import Header from '../components/header'
 const Shop = ({ navigation }: any) => {
     return (
         <View style={style.tabs}>
-            <Header />
+            <Header navigation={navigation} />
             <ActionTab navigation={navigation} />
             <Products navigation={navigation} />
         </View>

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import React from 'react'
 
@@ -32,13 +32,16 @@ const ActionTab = ({ navigation }: any) => {
             navigation.openDrawer();
         }
     }
+
     return (
-        <View style={style.container}>
-            {actionTabs?.map(tab => <TouchableOpacity style={style.content} onPress={() => toggleDrawer(tab)}>
-                <Text style={style.text}>{tab.name}</Text>
-                <MaterialIcons name={tab.icon} size={tab.size} />
-            </TouchableOpacity>)}
-        </View>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View style={style.container}>
+                {actionTabs?.map(tab => <TouchableOpacity style={style.content} onPress={() => toggleDrawer(tab)}>
+                    <Text style={style.text}>{tab.name}</Text>
+                    <MaterialIcons name={tab.icon} size={tab.size} />
+                </TouchableOpacity>)}
+            </View>
+        </ScrollView>
     )
 }
 
@@ -47,20 +50,20 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
-        top: 10,
+        gap: 6
     },
     content: {
         flexDirection: 'row',
         alignItems: 'center',
         borderColor: 'gray',
-        borderWidth: 0.5,
+        borderWidth: 1,
         borderStyle: 'solid',
         justifyContent: 'center',
-        paddingHorizontal: 7,
-        borderRadius: 30
+        paddingHorizontal: 8,
+        borderRadius: 100,
+        paddingVertical: 3
     },
     text: {
-        fontSize: 15
     }
 })
 

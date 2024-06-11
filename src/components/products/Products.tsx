@@ -4,12 +4,12 @@ import { PRODUCT_DATA } from '../../../data/productData'
 import ProductsCard from '../ProductCard/index'
 import { StyleSheet } from 'react-native'
 
-const Products = () => {
+const Products = ({ navigation }: any) => {
     return (
         <ScrollView>
             <View style={style.parent}>
                 {PRODUCT_DATA?.map(products => (
-                    <ProductsCard key={products?._id} product={products} />
+                    <ProductsCard key={products?._id} product={products} navigation={navigation} />
                 ))}
             </View>
         </ScrollView>
@@ -22,7 +22,8 @@ const style = StyleSheet.create({
         flexWrap: 'wrap',
         width: '100%',
         flexDirection: 'row',
-        paddingBottom: 30
+        paddingBottom: 10,
+        alignItems: 'center',
     }
 })
 

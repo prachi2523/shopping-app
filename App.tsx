@@ -7,30 +7,24 @@
 import 'react-native-gesture-handler'
 import React, { useEffect, useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from './redux/store';
 import NavigationStack from './src/navigations/NavigationStack';
-import { getAuthToken } from './services/storageService';
-
+import { getAuthToken, getuser } from './services/storageService';
+import { ToastProvider } from 'react-native-toast-notifications';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { AuthProvider } from './src/context/AuthContexts';
 
 function App(): React.JSX.Element {
-  const [isAuth, setIsAuth] = useState<string | null>(null)
-
-  useEffect(() => {
-    getAuth();
-  }, [])
-
-  const getAuth = async () => {
-    const token = await getAuthToken();
-    if (token) {
-      setIsAuth(token)
-    }
-  }
 
   return (
-    <Provider store={store}>
-      <NavigationStack isAuth={isAuth} />
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <ToastProvider duration={2000} successColor='#5cc565' successIcon={<Ionicons name="checkmark-done-circle" size={20} />}>
+          <NavigationStack />
+        </ToastProvider>
+      </Provider>
+    </AuthProvider>
   )
 
 }

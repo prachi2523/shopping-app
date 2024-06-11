@@ -1,28 +1,40 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import InputBox from '../../components/form/InputBox';
+import { authenticate } from '../../../redux/authSlice';
+import { useToast } from 'react-native-toast-notifications';
+import { AuthContext } from '../../context/AuthContexts';
 
 const Login = ({ navigation }: any) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const { onboarded, setIsAuth } = useContext(AuthContext)
 
 
     const dispatch = useDispatch()
+    const toast = useToast()
 
     const handleRegister = () => {
+
         //@ts-ignore
         navigation.navigate("Register")
     }
 
+    // emilys  emilyspass
+
+    console.log(onboarded)
+
     const handleLogin = () => {
         if (email && password) {
             //@ts-ignore
-            // dispatch(authenticate({ username: email, password: password }))
-            //@ts-ignore
-            // navigation.navigate('AppStack');
+            dispatch(authenticate({ username: email, password: password })).unwrap().then(res => {
+                setIsAuth(res.token)
+                toast.show("Login successfully", { type: 'success' })
+            })
+
         }
     }
 

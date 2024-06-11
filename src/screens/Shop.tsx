@@ -9,16 +9,18 @@ const Shop = ({ navigation }: any) => {
         <View style={style.tabs}>
             <Header />
             <ActionTab navigation={navigation} />
-            <Products />
+            <Products navigation={navigation} />
         </View>
     )
 }
 
 const style = StyleSheet.create({
     tabs: {
-        gap: 15,
+        gap: 5,
         flexDirection: 'column',
-        height: '100%'
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 

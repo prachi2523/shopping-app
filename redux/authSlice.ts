@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ApiService from "../services/ApiService";
 import axios from "axios";
-import { getAuthToken, setAuthToken } from "../services/storageService";
+import { getAuthToken, setAuthToken, setUser } from "../services/storageService";
 
 interface LoginParam {
     username: string,
@@ -26,11 +26,13 @@ export const authSlice = createSlice({
     initialState: {
         loading: false,
         error: null,
-        data: null,
+        data: null
     },
 
     reducers: {
-
+        logOut: () => {
+            setAuthToken("");
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(authenticate.pending, (state) => {
@@ -45,13 +47,15 @@ export const authSlice = createSlice({
         });
         builder.addCase(authenticate.fulfilled, (state, action) => {
             state.loading = false;
-            console.log(action.payload.token, "PAYLOAD")
+            console.log(action.payload, "PAYLOAD")
             if (action.payload.token) {
+                setUser({ firstName: action.payload.firstName, lastName: action.payload.lastName, email: action.payload.email })
                 setAuthToken(action.payload.token)
-                // resetScreen()
             }
         });
     },
 });
+
+export const { logOut } = authSlice.actions
 
 export default authSlice.reducer;

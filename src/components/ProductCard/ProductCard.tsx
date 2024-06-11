@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { data } from '../../../data/Quantity';
 import DropDown from '../dropDown/DropDown';
+import { PRIMARY_COLOR } from '../../utils/color';
 
 interface ProductProps {
     product: {
@@ -12,14 +13,15 @@ interface ProductProps {
         imageUrl: string,
         description: string,
         price: string
-    }
+    },
+    navigation: any
 }
 
-const ProductsCard: React.FC<ProductProps> = ({ product }) => {
+const ProductsCard: React.FC<ProductProps> = ({ navigation, product }) => {
     const [value, setValue] = useState<any>(data[0]);
 
     const handleDetail = (id: any) => {
-        // navigation.navigate('ProductDetail', { id })
+        navigation.navigate('ProductDetail', { id })
     }
 
     const handleAddToCart = (id: any) => {
@@ -36,7 +38,7 @@ const ProductsCard: React.FC<ProductProps> = ({ product }) => {
             </View>
             <View style={style.eventCont}>
                 <DropDown style={dropStyle} value={value} setValue={setValue} data={data} />
-                <TouchableOpacity style={style.eventCart}>
+                <TouchableOpacity style={style.eventCart} onPress={handleAddToCart}>
                     <Text style={style.addCart}>Add to cart</Text>
                 </TouchableOpacity>
             </View>
@@ -50,7 +52,7 @@ const dropStyle = StyleSheet.create({
         width: "100%",
     },
     dropdown: {
-        borderColor: '#2e4e99',
+        borderColor: PRIMARY_COLOR,
         borderWidth: 0.5,
         borderRadius: 8,
         paddingHorizontal: 8,
@@ -73,22 +75,22 @@ const dropStyle = StyleSheet.create({
 
 const style = StyleSheet.create({
     prodContainer: {
-        paddingVertical: 10,
         display: 'flex',
         flexDirection: 'column',
-        borderRadius: 5,
+        borderRadius: 8,
         overflow: 'hidden',
         width: "45%",
+        maxHeight: 281,
         justifyContent: 'center',
-        padding: 5,
+        padding: 10,
         marginHorizontal: 8,
         marginVertical: 10,
         backgroundColor: '#ffff',
-        gap: 7,
+        gap: 12,
     },
     prodImage: {
         width: "100%",
-        height: 150,
+        height: 111,
         objectFit: 'cover',
     },
     prodTitle: {
@@ -108,14 +110,14 @@ const style = StyleSheet.create({
         gap: 7
     },
     eventCart: {
-        backgroundColor: "#2e4e99",
+        backgroundColor: PRIMARY_COLOR,
         width: "100%",
         justifyContent: 'center',
         padding: 7,
         alignItems: 'center',
-        borderRadius: 4,
+        borderRadius: 6,
         fontSize: 12,
-        borderColor: '#2e4e99',
+        borderColor: PRIMARY_COLOR,
         borderWidth: 1,
         borderStyle: 'solid',
     },

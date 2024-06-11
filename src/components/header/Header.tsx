@@ -1,6 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Header = () => {
     const [searchText, setSearchText] = useState("")
@@ -10,15 +10,18 @@ const Header = () => {
     }
     return (
         <View style={style.topContainer}>
+            <View>
+                <Ionicons name='arrow-back' size={25} />
+            </View>
             <View style={style.container}>
-                <TextInput style={style.inputBox} onChangeText={setSearchText} />
                 <TouchableOpacity style={style.searchBtn} onPress={handleSearch}>
-                    <FontAwesome name="search" />
+                    <Ionicons name="search-outline" size={20} />
                 </TouchableOpacity>
+                <TextInput style={style.inputBox} onChangeText={setSearchText} placeholder='Search' />
             </View>
             <View>
                 <TouchableOpacity>
-                    <FontAwesome name="shopping-cart" style={style.cart} />
+                    <Ionicons name="cart-outline" style={style.cart} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -28,38 +31,35 @@ const Header = () => {
 
 const style = StyleSheet.create({
     topContainer: {
-        height: 70,
-        // borderColor: 'red',
-        // borderWidth: 2,
-        // borderStyle: 'solid',
+        height: 60,
         backgroundColor: "#e7e1fb63",
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        gap: 5,
     },
     container: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 10,
+        paddingHorizontal: 12,
         flex: 1,
         alignItems: 'center',
-        height: 10,
+        backgroundColor: '#fff',
+        height: 35,
+        borderRadius: 12,
+        width: "100%"
     },
     inputBox: {
-        width: "100%",
-        position: 'absolute',
-        left: '2%',
-        height: 35,
+        height: "100%",
         color: '#000000',
-        backgroundColor: '#fff',
-        borderRadius: 12,
-        fontSize: 15
+        fontSize: 12,
+        flex: 9,
+        alignItems: 'center',
     },
     searchBtn: {
-        position: 'absolute',
-        left: "5%"
+        flex: 1
     },
     cart: {
         fontSize: 28,

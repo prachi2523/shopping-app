@@ -32,6 +32,7 @@ const Login = ({ navigation }: any) => {
             //@ts-ignore
             dispatch(authenticate({ username: email, password: password })).unwrap().then(res => {
                 setIsAuth(res.token)
+                // navigation.navigate(onboarded ? 'HomeScreen' : "Onboarding")
                 toast.show("Login successfully", { type: 'success' })
             })
 

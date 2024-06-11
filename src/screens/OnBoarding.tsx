@@ -1,11 +1,14 @@
 import { View, Text, Button, Image, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { setOnBoard } from '../../services/storageService'
+import { AuthContext } from '../context/AuthContexts'
 
 const OnBoarding = ({ navigation }: any) => {
+    const { setOnboarded } = useContext(AuthContext)
 
     const handleFinish = async () => {
         await setOnBoard();
+        setOnboarded(true)
         navigation.navigate("HomeScreen")
     }
 
